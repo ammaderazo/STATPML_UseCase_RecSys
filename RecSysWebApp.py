@@ -11,10 +11,10 @@ st.set_page_config(layout="wide")
 st.title("Amazon Prime Videos Recommender System")
 st.caption("Recommender System Deployment as part of a technical use case for STAT280 Practical Machine Learning")
 
+@st.cache
 media_df = pd.read_pickle('Resources/AmazonPrimeDF_processed.pkl')
 titles = media_df['title']
 titles = titles.sort_values()
-
 
 vectorizer = CountVectorizer()
 mtx_trans = vectorizer.fit_transform(media_df["features"])
