@@ -11,17 +11,17 @@ st.set_page_config(layout="wide")
 st.title("Amazon Prime Videos Recommender System")
 st.caption("Recommender System Deployment as part of a technical use case for STAT280 Practical Machine Learning")
 
-@st.cache()
 media_df = pd.read_pickle('Resources/AmazonPrimeDF_processed.pkl')
 titles = media_df['title']
 titles = titles.sort_values()
 
-vectorizer = CountVectorizer()
-mtx_trans = vectorizer.fit_transform(media_df["features"])
-cos_sim = cosine_similarity(mtx_trans)
 
 
+@st.cache(allow_output_mutation=True)
 def generate_recos(input_media, num_reco):
+    vectorizer = CountVectorizer()
+    mtx_trans = vectorizer.fit_transform(media_df["features"])
+    cos_sim = cosine_similarity(mtx_trans)
     source_id = media_df[media_df["title"]== input_media].index.values[0]
     sim_list= list(enumerate(cos_sim[source_id]))
     sorted_sim = sorted(sim_list, key=lambda x:x[1], reverse=True)[1:]
