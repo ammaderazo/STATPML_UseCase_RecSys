@@ -3,14 +3,11 @@ import pandas as pd
 import numpy as np 
 import streamlit as st 
 import time
-from PIL import Image
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 
 st.set_page_config(layout="wide")
-image = Image.open('Resources/RecSys_header.jpg')
-st.image(image)
 st.title("Amazon Prime Videos Recommender System")
 st.caption("Recommender System Deployment as part of a technical use case for STAT280 Practical Machine Learning")
 
